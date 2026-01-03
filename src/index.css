@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .font-cursive {
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+  }
+}
