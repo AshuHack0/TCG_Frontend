@@ -11,7 +11,7 @@ const AuthPage = () => {
 
   const discordLoginParams = {
     clientId: '1353009606363709480',
-    redirectUri: 'http://localhost:3000/signin',
+    redirectUri: `${window.location.origin}/signin`,
     responseType: 'token',
     scopes: ['identify', 'email'],
     onSuccess: response => {
@@ -62,15 +62,18 @@ const AuthPage = () => {
   const { buildUrl, isLoading } = useDiscordLogin(discordLoginParams);
 
   useEffect(() => {
-    // Smooth scroll to top on mount
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Prevent scrolling
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, []);
 
   return (
     <>
       <ToastContainer 
         containerId="authPage" 
-        position="top-right"
+        position="top-center"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -80,27 +83,29 @@ const AuthPage = () => {
         draggable
         pauseOnHover
         theme="dark"
+        className="!top-4 sm:!top-6"
+        toastClassName="!text-sm sm:!text-base"
       />
-      <div className='min-h-screen bg-gray-800 flex flex-col lg:flex-row overflow-x-hidden'>
+      <div className='h-screen bg-gray-800 flex flex-col lg:flex-row overflow-hidden'>
         {/* Left Section - Descriptive Panels */}
-        <div className='w-full lg:w-1/2 p-6 lg:p-8 xl:p-12 flex flex-col justify-center gap-6 lg:gap-8 overflow-y-auto max-h-screen'>
+        <div className='w-full lg:w-1/2 p-3 sm:p-4 md:p-6 lg:p-6 xl:p-8 flex flex-col justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 overflow-hidden'>
           {/* Panel 1: Discover and collect - Light Blue Background */}
           <div 
-            className='bg-[#a8d5e2] rounded-lg p-5 lg:p-6 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#a8d5e2]/50 hover:scale-[1.02]'
+            className='bg-[#a8d5e2] rounded-lg p-2 sm:p-3 md:p-4 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#a8d5e2]/50'
             style={{ animation: 'fadeInUp 0.6s ease-out' }}
           >
-            <div className='flex flex-col sm:flex-row items-start gap-4'>
-              <div className='flex-shrink-0 w-full sm:w-[45%] lg:w-[40%] h-48 sm:h-auto sm:min-h-[200px] bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden transition-transform duration-300 hover:scale-105'>
+            <div className='flex flex-col sm:flex-row items-start gap-2 sm:gap-3'>
+              <div className='flex-shrink-0 w-full sm:w-[40%] lg:w-[35%] h-32 sm:h-36 md:h-40 bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden'>
                 <img 
                   src="/ss1.png" 
                   alt="Discover and collect" 
-                  className='w-full h-full object-contain'
+                  className='w-full h-full object-contain p-1'
                   loading="lazy"
                 />
               </div>
               <div className='flex-1 min-w-0'>
-                <h3 className='text-black text-lg lg:text-xl font-bold mb-2 sm:mb-3'>Discover and collect</h3>
-                <p className='text-black text-xs sm:text-sm leading-relaxed'>
+                <h3 className='text-black text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2'>Discover and collect</h3>
+                <p className='text-black text-[10px] sm:text-xs md:text-sm leading-tight sm:leading-relaxed'>
                   Discover and collect unique digital cards tied to the indie games we host. Cardpon's digital collectibles are designed to spotlight indie creators, create collectible economies, and give players a reason to return beyond matches: trade, flex, and complete your collections as new games join the shop.
                 </p>
               </div>
@@ -109,21 +114,21 @@ const AuthPage = () => {
 
           {/* Panel 2: Play the physical game - Light Yellow Background */}
           <div 
-            className='bg-[#f7e98e] rounded-lg p-5 lg:p-6 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#f7e98e]/50 hover:scale-[1.02]'
+            className='bg-[#f7e98e] rounded-lg p-2 sm:p-3 md:p-4 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#f7e98e]/50'
             style={{ animation: 'fadeInUp 0.8s ease-out' }}
           >
-            <div className='flex flex-col sm:flex-row items-start gap-4'>
-              <div className='flex-shrink-0 w-full sm:w-[45%] lg:w-[40%] h-48 sm:h-auto sm:min-h-[200px] bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden transition-transform duration-300 hover:scale-105'>
+            <div className='flex flex-col sm:flex-row items-start gap-2 sm:gap-3'>
+              <div className='flex-shrink-0 w-full sm:w-[40%] lg:w-[35%] h-32 sm:h-36 md:h-40 bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden'>
                 <img 
                   src="/ss2.png" 
                   alt="Play the physical game" 
-                  className='w-full h-full object-contain'
+                  className='w-full h-full object-contain p-1'
                   loading="lazy"
                 />
               </div>
               <div className='flex-1 min-w-0'>
-                <h3 className='text-black text-lg lg:text-xl font-bold mb-2 sm:mb-3'>Play the physical game you love</h3>
-                <p className='text-black text-xs sm:text-sm leading-relaxed'>
+                <h3 className='text-black text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2'>Play the physical game you love</h3>
+                <p className='text-black text-[10px] sm:text-xs md:text-sm leading-tight sm:leading-relaxed'>
                   Play the physical game you love with real opponents from anywhere. Cardpon provides automatic matchmaking and a standardized remote setup (top-down webcam, clear zones, on-camera shuffles) so matches are fair, transparent, and tournament-ready. Matches can be streamed or recorded for creators and community content; players get instant, ranked play with no local-store requirement.
                 </p>
               </div>
@@ -132,21 +137,21 @@ const AuthPage = () => {
 
           {/* Panel 3: Rise through ladders - Light Pink Background */}
           <div 
-            className='bg-[#f5c2c7] rounded-lg p-5 lg:p-6 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#f5c2c7]/50 hover:scale-[1.02]'
+            className='bg-[#f5c2c7] rounded-lg p-2 sm:p-3 md:p-4 border-2 border-black transition-all duration-300 hover:shadow-lg hover:shadow-[#f5c2c7]/50'
             style={{ animation: 'fadeInUp 1s ease-out' }}
           >
-            <div className='flex flex-col sm:flex-row items-start gap-4'>
-              <div className='flex-shrink-0 w-full sm:w-[45%] lg:w-[40%] h-48 sm:h-auto sm:min-h-[200px] bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden transition-transform duration-300 hover:scale-105'>
+            <div className='flex flex-col sm:flex-row items-start gap-2 sm:gap-3'>
+              <div className='flex-shrink-0 w-full sm:w-[40%] lg:w-[35%] h-32 sm:h-36 md:h-40 bg-white rounded-lg flex items-center justify-center border-2 border-black overflow-hidden'>
                 <img 
                   src="/ss3.png" 
                   alt="Rise through ladders" 
-                  className='w-full h-full object-contain'
+                  className='w-full h-full object-contain p-1'
                   loading="lazy"
                 />
               </div>
               <div className='flex-1 min-w-0'>
-                <h3 className='text-black text-lg lg:text-xl font-bold mb-2 sm:mb-3'>Rise through ladders</h3>
-                <p className='text-black text-xs sm:text-sm leading-relaxed'>
+                <h3 className='text-black text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2'>Rise through ladders</h3>
+                <p className='text-black text-[10px] sm:text-xs md:text-sm leading-tight sm:leading-relaxed'>
                   Rise through ladders, seasonal leaderboards, and tournaments to become a Cardpon champion. Every match updates your stats and rank; seasonal resets and badges keep competition fresh. Free players can jump in (limited concurrent slots), while subscribers skip queue and enjoy priority access – all built to reward active competitors, spotlight top players, and give indie developers real players and publicity.
                 </p>
               </div>
@@ -155,19 +160,19 @@ const AuthPage = () => {
         </div>
 
         {/* Right Section - Logo, Tagline, and Login */}
-        <div className='w-full lg:w-1/2 p-6 lg:p-8 xl:p-12 flex flex-col justify-center items-center bg-black m-20 rounded-[100px] shadow-2xl shadow-white/20'>
+        <div className='w-full lg:w-1/2 p-3 sm:p-4 md:p-6 lg:p-6 xl:p-8 flex flex-col justify-center items-center bg-black m-2 sm:m-4 md:m-6 lg:m-8 xl:m-10 rounded-2xl sm:rounded-3xl md:rounded-[40px] lg:rounded-[60px] xl:rounded-[100px] shadow-2xl shadow-white/20 overflow-hidden'>
           {/* CARDPON Logo */}
-          <div className='mb-6 lg:mb-8 text-center animate-fadeIn' style={{ animation: 'fadeIn 0.8s ease-out' }}>
+          <div className='mb-2 sm:mb-3 md:mb-4 lg:mb-6 text-center animate-fadeIn' style={{ animation: 'fadeIn 0.8s ease-out' }}>
             <div className='relative inline-block'>
               <img 
                 src="/Logo.png" 
                 alt="CARDPON Logo" 
-                className='w-[250px] sm:w-[300px] lg:w-[350px] max-w-full mx-auto mb-4 transition-transform duration-300 hover:scale-105'
+                className='w-[120px] sm:w-[180px] md:w-[220px] lg:w-[280px] xl:w-[350px] max-w-full mx-auto mb-2 sm:mb-3'
                 loading="eager"
               />
             </div>
             <p 
-              className='text-[#2cac4f] text-xl sm:text-2xl lg:text-3xl italic mt-2 animate-fadeIn' 
+              className='text-[#2cac4f] text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl italic mt-1 sm:mt-2 animate-fadeIn px-2' 
               style={{ 
                 fontFamily: "'Brush Script MT', 'Lucida Handwriting', cursive",
                 animation: 'fadeIn 1s ease-out 0.2s both'
@@ -179,10 +184,10 @@ const AuthPage = () => {
 
           {/* Login Panel */}
           <div 
-            className='bg-white rounded-lg shadow-2xl p-6 sm:p-8 w-full max-w-md transition-all duration-300 hover:shadow-3xl hover:shadow-white/20'
+            className='bg-white rounded-lg shadow-2xl p-3 sm:p-4 md:p-5 lg:p-6 w-full max-w-md mx-2 transition-all duration-300'
             style={{ animation: 'fadeInUp 1.2s ease-out' }}
           >
-            <h2 className='text-xl sm:text-2xl font-bold text-center mb-6 text-gray-800'>Login</h2>
+            <h2 className='text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-center mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-gray-800'>Login</h2>
             <button
               onClick={() => {
                 if (!isLoading && !isAuthenticating) {
@@ -191,16 +196,15 @@ const AuthPage = () => {
               }}
               disabled={isLoading || isAuthenticating}
               type="button"
-              className="w-full bg-[#5865F2] text-white py-3 px-4 rounded-lg font-semibold
+              className="w-full bg-[#5865F2] text-white py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 rounded-lg font-semibold text-xs sm:text-sm md:text-base
                        hover:bg-[#4752C4] active:bg-[#3c45a5] transition-all duration-200
                        focus:outline-none focus:ring-2 focus:ring-[#5865F2] focus:ring-offset-2
-                       flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed
-                       transform hover:scale-[1.02] active:scale-[0.98]"
+                       flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Login with Discord"
             >
               {isLoading || isAuthenticating ? (
                 <>
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
@@ -208,14 +212,14 @@ const AuthPage = () => {
                 </>
               ) : (
                 <>
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
                   </svg>
-                  <span>Login with Discord</span>
+                  <span className="whitespace-nowrap">Login with Discord</span>
                 </>
               )}
             </button>
-            <p className='text-center mt-6 text-gray-600 text-sm'>
+            <p className='text-center mt-2 sm:mt-3 md:mt-4 text-gray-600 text-[10px] sm:text-xs md:text-sm'>
               Not registered?{' '}
               <Link
                 className='text-[#2cac4f] cursor-pointer font-bold hover:underline transition-colors duration-200 hover:text-[#228B3A]'
@@ -228,7 +232,7 @@ const AuthPage = () => {
           </div>
 
           {/* Footer Text */}
-          <p className='mt-6 lg:mt-8 text-gray-400 text-xs sm:text-sm text-center max-w-md leading-relaxed px-4'>
+          <p className='mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-gray-400 text-[9px] sm:text-[10px] md:text-xs text-center max-w-md leading-tight sm:leading-relaxed px-2'>
             We chose to integrate exclusively with Discord Login (OAuth 2.0) to build our community and game platform on a foundation of safety, security, and integrity. Your protection is our top priority, and Discord provides layers of defense we believe are essential.
           </p>
         </div>
