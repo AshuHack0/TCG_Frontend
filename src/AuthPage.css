@@ -1,0 +1,64 @@
+/* AuthPage Styles - Atkinson Hyperlegible Mono Font Weights */
+
+/* Page heading / title - font-weight: 700 */
+.auth-heading {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Input labels - font-weight: 500 */
+.auth-label {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Input text - font-weight: 400 */
+.auth-input {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Buttons - font-weight: 600 */
+.auth-button {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Helper text / links - font-weight: 400 */
+.auth-helper-text {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.auth-link {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Panel text content - font-weight: 400 */
+.auth-panel-text {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Panel headings - font-weight: 700 */
+.auth-panel-heading {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Footer text - font-weight: 400 */
+.auth-footer-text {
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
